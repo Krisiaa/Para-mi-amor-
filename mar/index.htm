@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para ti 💜</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            color: white;
+            text-align: center;
+            overflow-x: hidden;
+            background:
+                radial-gradient(ellipse at center, #21142e 0%, #100b16 55%, #030204 100%);
+        }
+
+        /* Luces brillantes */
+        .luces {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .luz {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: #d9a8ff;
+            box-shadow: 0 0 12px 4px #a855f7;
+            animation: brillar 3s infinite alternate;
+        }
+
+        @keyframes brillar {
+            from {
+                opacity: 0.2;
+                transform: scale(0.7);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1.5);
+            }
+        }
+
+        /* Contenido principal */
+        .contenido {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            padding: 65px 22px 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Margaritas */
+        .margarita {
+            font-size: 95px;
+            margin-bottom: 25px;
+            filter: drop-shadow(0 0 22px #c084fc);
+            animation: flotar 3s ease-in-out infinite;
+        }
+
+        @keyframes flotar {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        h1 {
+            color: #d8a5ff;
+            font-size: clamp(42px, 10vw, 64px);
+            margin-bottom: 35px;
+            text-shadow: 0 0 15px #a855f7,
+                         0 0 35px #9333ea;
+        }
+
+        .descripcion {
+            font-size: clamp(18px, 4.5vw, 25px);
+            line-height: 1.7;
+            max-width: 650px;
+            margin-bottom: 45px;
+            color: #f7edff;
+        }
+
+        /* Botón */
+        .boton {
+            width: min(100%, 480px);
+            padding: 22px 15px;
+            border: 3px solid #c084fc;
+            border-radius: 60px;
+            background: rgba(126, 34, 206, 0.12);
+            color: #e9caff;
+            font-size: clamp(18px, 4.5vw, 25px);
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 0 18px #9333ea,
+                        inset 0 0 15px #7e22ce33;
+            transition: 0.3s;
+            margin-bottom: 15px;
+        }
+
+        .boton:hover {
+            background: #7e22ce;
+            color: white;
+            transform: scale(1.03);
+            box-shadow: 0 0 30px #c084fc;
+        }
+
+        /* Mensaje oculto */
+        #mensaje {
+            display: none;
+            max-width: 650px;
+            margin-top: 45px;
+            animation: aparecer 1.2s ease;
+        }
+
+        #mensaje h2 {
+            color: #d8a5ff;
+            font-size: clamp(27px, 6vw, 42px);
+            margin-bottom: 22px;
+            text-shadow: 0 0 15px #a855f7;
+        }
+
+        #mensaje p {
+            font-size: clamp(18px, 4.5vw, 24px);
+            line-height: 1.7;
+            color: #f7edff;
+        }
+
+        @keyframes aparecer {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Margaritas decorativas inferiores */
+        .flores-abajo {
+            position: fixed;
+            bottom: -15px;
+            left: 0;
+            width: 100%;
+            font-size: clamp(35px, 9vw, 65px);
+            white-space: nowrap;
+            overflow: hidden;
+            z-index: 1;
+            filter: drop-shadow(0 0 15px #c084fc);
+            pointer-events: none;
+        }
+
+        .corazon {
+            display: inline-block;
+            color: #c084fc;
+            text-shadow: 0 0 15px #a855f7;
+            animation: latir 1.5s infinite;
+        }
+
+        @keyframes latir {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+        /* --- AGREGADOS PEDIDOS --- */
+
+        /* Corazones morados cayendo */
+        .corazon-caido {
+            position: fixed;
+            top: -50px;
+            font-size: clamp(20px, 5vw, 35px);
+            color: #c084fc;
+            text-shadow: 0 0 10px #a855f7;
+            pointer-events: none;
+            z-index: 2;
+            animation: caer linear forwards;
+        }
+
+        @keyframes caer {
+            to {
+                transform: translateY(105vh) rotate(360deg);
+            }
+        }
+
+        /* Mariposas de los lados */
+        .mariposa {
+            position: fixed;
+            font-size: clamp(25px, 6vw, 45px);
+            pointer-events: none;
+            z-index: 2;
+            filter: drop-shadow(0 0 10px #a855f7);
+            animation: volarLado linear forwards;
+        }
+
+        @keyframes volarLado {
+            0% {
+                opacity: 0;
+                transform: translate(0, 0) scale(0.8);
+            }
+            20% {
+                opacity: 1;
+            }
+            80% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translate(var(--tx), var(--ty)) scale(1.2);
+            }
+        }
+
+        /* Segunda Página (Daniela) */
+        #pagina-daniela {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(ellipse at center, #21142e 0%, #100b16 55%, #030204 100%);
+            z-index: 10;
+            overflow-y: auto;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            animation: aparecer 1s ease;
+        }
+
+        .nombre-grande {
+            font-size: clamp(50px, 14vw, 100px);
+            color: #e9caff;
+            font-weight: bold;
+            letter-spacing: 4px;
+            text-shadow: 0 0 20px #a855f7, 0 0 40px #9333ea, 0 0 60px #c084fc;
+            margin: 20px 0;
+        }
+
+        .te-amo-grande {
+            font-size: clamp(40px, 10vw, 75px);
+            color: #d8a5ff;
+            font-weight: bold;
+            text-shadow: 0 0 20px #a855f7, 0 0 35px #9333ea;
+            margin-top: 15px;
+            animation: latir 1.5s infinite;
+        }
+
+        .margaritas-contenedor {
+            font-size: clamp(50px, 12vw, 90px);
+            margin: 15px 0;
+            filter: drop-shadow(0 0 20px #c084fc);
+        }
+
+        .boton-volver {
+            margin-top: 35px;
+            padding: 12px 30px;
+            border: 2px solid #c084fc;
+            border-radius: 30px;
+            background: transparent;
+            color: #e9caff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .boton-volver:hover {
+            background: #7e22ce;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Luces de fondo -->
+    <div class="luces" id="luces"></div>
+
+    <main class="contenido">
+
+        <div class="margarita">🌼</div>
+
+        <h1>Para ti</h1>
+
+        <p class="descripcion">
+            Hay personas que llegan a nuestra vida
+            y hacen que todo sea más bonito.
+        </p>
+
+        <button class="boton" onclick="mostrarMensaje()">
+            🌼 Para alguien especial 💜
+        </button>
+
+        <button class="boton" onclick="abrirPaginaDaniela()">
+            ADIVINA QUIEN ES EL AMOR DE MI VIDA 💜
+        </button>
+
+        <section id="mensaje">
+            <h2>
+                <span class="corazon">💜</span>
+                Te amo con toda mi alma
+                <span class="corazon">💜</span>
+            </h2>
+
+            <p>
+                Gracias por existir, por iluminar mis días
+                y por hacer que mi mundo sea más bonito.
+                Eres una personita muy especial para mí
+                y quiero que nunca olvides lo mucho que te amo. 🌼💜
+            </p>
+        </section>
+
+    </main>
+
+    <!-- Decoración inferior -->
+    <div class="flores-abajo">
+        🌼 🌼 🌼 🌼 🌼 🌼 🌼 🌼 🌼 🌼
+    </div>
+
+    <!-- Página interactiva para DANIELA -->
+    <div id="pagina-daniela">
+        <div class="margaritas-contenedor">🌼 🌼 🌼</div>
+        <div class="nombre-grande">DANIELA</div>
+        <div class="margaritas-contenedor">🌼 🌼 🌼</div>
+        <div class="te-amo-grande">TE AMO</div>
+        <button class="boton-volver" onclick="cerrarPaginaDaniela()">Volver</button>
+    </div>
+
+    <script>
+        // Crear pequeñas luces lilas
+        const luces = document.getElementById("luces");
+
+        for (let i = 0; i < 75; i++) {
+            const luz = document.createElement("span");
+            luz.classList.add("luz");
+
+            luz.style.left = Math.random() * 100 + "%";
+            luz.style.top = Math.random() * 100 + "%";
+
+            luz.style.animationDelay = Math.random() * 3 + "s";
+            luz.style.animationDuration =
+                (2 + Math.random() * 4) + "s";
+
+            luces.appendChild(luz);
+        }
+
+        // Mostrar el mensaje al presionar el botón
+        function mostrarMensaje() {
+            const mensaje = document.getElementById("mensaje");
+
+            mensaje.style.display = "block";
+
+            // Llevar el mensaje a la vista en el teléfono
+            mensaje.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+
+            // Lanza mariposas desde los lados al presionar "Para ti"
+            lanzarMariposasDeLados();
+        }
+
+        // --- FUNCIONALIDADES NUEVAS ---
+
+        // Corazones morados cayendo infinitamente
+        function crearCorazon() {
+            const corazon = document.createElement("div");
+            corazon.classList.add("corazon-caido");
+            corazon.innerText = "💜";
+            corazon.style.left = Math.random() * 100 + "vw";
+            
+            const duracion = 3 + Math.random() * 4;
+            corazon.style.animationDuration = duracion + "s";
+            corazon.style.opacity = Math.random() * 0.7 + 0.3;
+
+            document.body.appendChild(corazon);
+
+            setTimeout(() => {
+                corazon.remove();
+            }, duracion * 1000);
+        }
+
+        setInterval(crearCorazon, 300);
+
+        // Mariposas saliendo de los lados
+        function lanzarMariposasDeLados() {
+            for (let i = 0; i < 12; i++) {
+                setTimeout(() => {
+                    const mariposa = document.createElement("div");
+                    mariposa.classList.add("mariposa");
+                    mariposa.innerText = "🦋";
+
+                    const saleDeIzquierda = Math.random() > 0.5;
+                    const posStartY = Math.random() * 80 + 10;
+
+                    if (saleDeIzquierda) {
+                        mariposa.style.left = "-50px";
+                        mariposa.style.top = posStartY + "vh";
+                        mariposa.style.setProperty('--tx', (Math.random() * 50 + 50) + 'vw');
+                    } else {
+                        mariposa.style.right = "-50px";
+                        mariposa.style.top = posStartY + "vh";
+                        mariposa.style.setProperty('--tx', '-' + (Math.random() * 50 + 50) + 'vw');
+                    }
+
+                    mariposa.style.setProperty('--ty', (Math.random() * 60 - 30) + 'vh');
+                    const duracion = 4 + Math.random() * 3;
+                    mariposa.style.animationDuration = duracion + "s";
+
+                    document.body.appendChild(mariposa);
+
+                    setTimeout(() => {
+                        mariposa.remove();
+                    }, duracion * 1000);
+                }, i * 250);
+            }
+        }
+
+        // Funciones para la página de Daniela
+        let intervaloMariposasDaniela;
+
+        function abrirPaginaDaniela() {
+            document.getElementById("pagina-daniela").style.display = "flex";
+            
+            // Genera mariposas moradas continuas en la página de Daniela
+            intervaloMariposasDaniela = setInterval(() => {
+                const mariposa = document.createElement("div");
+                mariposa.classList.add("mariposa");
+                mariposa.innerText = "🦋";
+                
+                mariposa.style.left = Math.random() * 90 + "vw";
+                mariposa.style.top = (Math.random() * 80 + 10) + "vh";
+                mariposa.style.setProperty('--tx', (Math.random() * 40 - 20) + 'vw');
+                mariposa.style.setProperty('--ty', '-' + (Math.random() * 40 + 20) + 'vh');
+                
+                const duracion = 3 + Math.random() * 3;
+                mariposa.style.animationDuration = duracion + "s";
+
+                document.getElementById("pagina-daniela").appendChild(mariposa);
+
+                setTimeout(() => {
+                    mariposa.remove();
+                }, duracion * 1000);
+            }, 400);
+        }
+
+        function cerrarPaginaDaniela() {
+            document.getElementById("pagina-daniela").style.display = "none";
+            clearInterval(intervaloMariposasDaniela);
+        }
+    </script>
+
+</body>
+</html>
